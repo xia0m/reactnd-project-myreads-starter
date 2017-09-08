@@ -2,14 +2,14 @@ import React  from 'react'
 import * as BooksAPI from './BooksAPI'
 import { Route } from 'react-router-dom'
 import './App.css'
-// import SearchBooks from './SearchBooks'
+import SearchBooks from './SearchBooks'
 import ListBooks from './ListBooks'
 
 class BooksApp extends React.Component {
   state = {
-    books:[]
-    // query:'',
-    // results:[],
+    books:[],
+    shelf:[]
+  
   }
   componentDidMount(){
     BooksAPI.getAll().then((books)=>{
@@ -17,6 +17,34 @@ class BooksApp extends React.Component {
       
     })
   }
+
+  updateBook = (book,shelf) => {
+    BooksAPI.update(book,shelf).then(() =>{
+      book.shelf = shelf
+      var updatedBooks = this.state.books.filter( b=> b.id !== book.id )
+      updatedBooks.push(book);
+      this.setState({ books: updatedBooks })
+    })
+  }
+  // updateBook(newBook,shelf){
+  //   BooksAPI.update(newBook,shelf).then((shelf)=>{
+  //     book.shelf = shelf
+  //     var updateBooks = this.state.books.filter(book => book.id! = n)
+  //   }
+  //   ).catch(e=>
+  //     console.log(e)
+  //   )
+  // }
+  // shouldComponentUpdate (nextProps,nextState){
+  //   if((this.state.shelf!=nextState.shelf) || this.state.shelf)
+  //   return false;
+  // }
+  // componentDidUpdate(){
+  //   BooksAPI.getAll().then((books)=>{
+  //     this.setState({books:books})
+      
+  //   })
+  // }
 
   // handleChange = (query)=>{
   //   this.setState({query:query.trim()})
@@ -71,13 +99,16 @@ class BooksApp extends React.Component {
 
     return (
 
-      <div>
+      <div className="app">
         <Route exact path='/' render={()=>(
-          <ListBooks books={this.state.books}/>
+          <ListBooks books={this.state.books}
+                     onUpdateBook={(book,shelf)=>{
+                       this.updateBook(book,shelf)
+                     }}/>
         )} />
-        {/* <Route path='/search' render={({history})=>(
+        <Route path='/search' render={({history})=>(
           <SearchBooks />
-        )}/> */}
+        )}/>
       </div>
       // <div className="app">
       //   {this.state.showSearchPage ? (

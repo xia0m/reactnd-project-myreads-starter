@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom'
-// import * as BooksAPI from './BooksAPI'
+import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
-   
+
+  
+
+    handleChange = (e,book)=>{
+       if(this.props.onUpdateBook)
+        this.props.onUpdateBook(book,e.target.value)
+    }
+    
     render(){
         const {books} = this.props;
         let myCurrentlyReading = books.filter((b)=>b.shelf==="currentlyReading")
@@ -11,7 +18,7 @@ class ListBooks extends Component {
         let myRead = books.filter((b)=>b.shelf==="read")
        
         return (
-            <div className="app">
+            <div>
                 <div className="list-books">
                     <div className="list-books-title">
                         <h1>MyReads</h1>
@@ -27,7 +34,7 @@ class ListBooks extends Component {
                                                 <div className="book-top">
                                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                                     <div className="book-shelf-changer">
-                                                        <select value={book.shelf}>
+                                                        <select value={book.shelf} onChange={(event,aBook)=>this.handleChange(event,book)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
@@ -39,8 +46,7 @@ class ListBooks extends Component {
                                               </div>
                                                     <div className="book-title">{book.title}</div>
                                                     <div className="book-authors">{book.author}</div>
-                                                </div>
-                                           
+                                                </div>                                          
                                         </li>
                                     ))}    
                                 </ol>
@@ -56,7 +62,7 @@ class ListBooks extends Component {
                                                 <div className="book-top">
                                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                                     <div className="book-shelf-changer">
-                                                        <select value={book.shelf}>
+                                                        <select value={book.shelf} onChange={(event,aBook)=>this.handleChange(event,book)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
@@ -85,7 +91,7 @@ class ListBooks extends Component {
                                                 <div className="book-top">
                                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                                     <div className="book-shelf-changer">
-                                                        <select value={book.shelf}>
+                                                        <select value={book.shelf} onChange={(event,aBook)=>this.handleChange(event,book)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
@@ -105,7 +111,7 @@ class ListBooks extends Component {
                             </div>
                         </div>             
                     </div>
-            {/* <Link to='/search' className="open-search" id="add">Add a book</Link> */}
+            <Link to='/search' className="open-search" id="add">Add a book</Link>
             
           </div>
         
