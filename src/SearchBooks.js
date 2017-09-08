@@ -22,6 +22,11 @@ class SearchBooks extends Component {
             .catch(e => console.log(e))
     }
 
+    handleChange = (e,book)=>{
+        if(this.props.onUpdateBook)
+         this.props.onUpdateBook(book,e.target.value)
+     }
+
     render(){
         let results;
         if(this.state.searchResults){
@@ -54,7 +59,7 @@ class SearchBooks extends Component {
                                                 <div className="book-top">
                                                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                                                     <div className="book-shelf-changer">
-                                                        <select value={book.shelf}>
+                                                        <select value={book.shelf} onChange={(event,aBook)=>this.handleChange(event,book)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
