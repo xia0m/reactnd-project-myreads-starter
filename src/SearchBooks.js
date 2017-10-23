@@ -51,7 +51,7 @@ class SearchBooks extends Component {
                         </div>
                     </div>
                 <div className="search-books-results">
-                </div>
+                
                     <ol className="books-grid">
                     {results.map((book)=>(                                       
                                         <li key={book.id}>
@@ -75,6 +75,7 @@ class SearchBooks extends Component {
                                         </li>
                                     ))}
                     </ol>
+                    </div>
                 </div>
             </div>
         )
