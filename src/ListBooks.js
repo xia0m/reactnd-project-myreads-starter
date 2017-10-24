@@ -19,7 +19,9 @@ class ListBooks extends Component {
         return (
             
                 <div className="list-books">
-                   
+                   <div className="list-books-title">
+                        <h1>MyReads</h1>
+                    </div>
                     {bookShelfTitle.map((theShelf)=>{
                         let myBook = books.filter((b)=>b.shelf===theShelf.name)
 

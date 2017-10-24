@@ -32,9 +32,7 @@ class BooksApp extends React.Component {
     return (
 
       <div className="app">
-         <div className="list-books-title">
-                        <h1>MyReads</h1>
-         </div>
+         
         <Route exact path='/' render={()=>(
           <ListBooks books={this.state.books}
                      onUpdateBook={(book,shelf)=>{
