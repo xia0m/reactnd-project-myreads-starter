@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import ChangeShelf from './ChangeShelf'
 
 class SearchBooks extends Component {
 
@@ -52,7 +53,9 @@ class SearchBooks extends Component {
                     </div>
                 <div className="search-books-results">
                 
-                    <ol className="books-grid">
+                    <ChangeShelf shelfBooks={results} 
+                                 onUpdateBook={this.props.onUpdateBook}/>
+                    {/* <ol className="books-grid">
                     {results.map((book)=>(                                       
                                         <li key={book.id}>
                                             <div className="book">
@@ -74,7 +77,7 @@ class SearchBooks extends Component {
                                                 </div>                                          
                                         </li>
                                     ))}
-                    </ol>
+                    </ol> */}
                     </div>
                 </div>
             </div>
