@@ -4,20 +4,20 @@ import ChangeShelf from './ChangeShelf'
 
 
 class ListBooks extends Component {
-
-    // handleChange = (e,book)=>{
-    //    if(this.props.onUpdateBook)
-    //     this.props.onUpdateBook(book,e.target.value)
-    // }
-    
+    /**
+     * @description list the books on the shelf, the books are from existing library, put them into
+     *              corresponding shelf
+     * @returns the JSX representation of all the books
+     */
     render(){
         const {books} = this.props;
+
+        /* divided the books to three shelves each with the corresponding name*/
         const bookShelfTitle = [{name:'currentlyReading',displayName:'Currently Reading'},
                                 {name:'wantToRead',displayName:'Want to Read'},
                                 {name:'read',displayName:'Read'}]
-       
         return (
-            
+
                 <div className="list-books">
                    <div className="list-books-title">
                         <h1>MyReads</h1>
@@ -39,7 +39,7 @@ class ListBooks extends Component {
                     })}
             <Link to='/search' className="open-search" id="add">Add a book</Link>
             
-          </div>          
+          </div>
         )
     }
 }

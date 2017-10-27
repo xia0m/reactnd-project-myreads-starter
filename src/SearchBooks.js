@@ -9,8 +9,10 @@ class SearchBooks extends Component {
         query:'',
         searchResults:[]
     }
-
-    
+    /**
+     * @description Handle the query typed in search bar
+     * @param {String} query - a search query
+     */
     handleSearch = (query) => {
         this.setState({query:query})
         BooksAPI.search(query,7).then((searchResults) => {
@@ -25,18 +27,17 @@ class SearchBooks extends Component {
 
     handleChange = (e,book)=>{
         if(this.props.onUpdateBook)
-         this.props.onUpdateBook(book,e.target.value)
+            this.props.onUpdateBook(book,e.target.value)
      }
 
     render(){
+        /* make sure the search result is not an empty string */
         let results;
         if(this.state.searchResults){
             results = this.state.searchResults
         } else {
             results = [1];
         }
-            
-
 
         return (
             <div>

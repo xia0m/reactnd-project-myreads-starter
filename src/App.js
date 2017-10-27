@@ -9,15 +9,18 @@ class BooksApp extends React.Component {
   state = {
     books:[],
     shelf:[]
-  
   }
+  /**
+   * @description The api call to get all the books in the library
+   */
   componentDidMount(){
     BooksAPI.getAll().then((books)=>{
       this.setState({books:books})
-      
     })
   }
-
+/**
+ * @description The api call to update the library when onUpdate happens
+ */
   updateBook = (book,shelf) => {
     BooksAPI.update(book,shelf).then(() =>{
       book.shelf = shelf
@@ -27,22 +30,19 @@ class BooksApp extends React.Component {
     })
   }
 
-  render() {  
-  
+  render(){
     return (
-
-      <div className="app">
-         
+      <div className='app'>
         <Route exact path='/' render={()=>(
           <ListBooks books={this.state.books}
                      onUpdateBook={(book,shelf)=>{
                        this.updateBook(book,shelf)
-                     }}/>
+                     }} />
         )} />
         <Route path='/search' render={({history})=>(
           <SearchBooks onUpdateBook={(book,shelf)=>{
                         this.updateBook(book,shelf)
-                        history.push('/')}}/>
+                        history.push('/')}} />
         )}/>
       </div>
       

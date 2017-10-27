@@ -3,17 +3,25 @@ import React, { Component } from 'react';
 
 class ChangeShelf extends Component {
 
+    /**
+     * @description Handle the click event, when click happens, record the event and
+     *              pass back all the info to its parent
+     * @param e - the click event
+     * @param {object} book - the specific book that need to be updated
+     */
     handleChange=(e,book)=>{
         if(this.props.onUpdateBook)
             this.props.onUpdateBook(book,e.target.value)
-     }
-
+    }
+    /**
+     * @description Handle the change of shelf
+     * @returns JSX representation of the shelf
+     */
     render(){
         return (
-            
-            <ol className="books-grid"> 
-                {  
-                    this.props.shelfBooks.map((book)=>(                                       
+            <ol className="books-grid">
+                {
+                    this.props.shelfBooks.map((book)=>(
                     <li key={book.id}>
                         <div className="book">
                             <div className="book-top">
